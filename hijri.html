@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hijri Calendar - Convert to Islamic Date</title>
+    <meta name="description" content="Convert Gregorian dates to Hijri Islamic calendar">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Islamic Tools Hub</div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="ad-space ad-top"><div class="ad-placeholder">Ad Space</div></div>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Hijri Calendar</h1>
+            <p>Convert Gregorian to Hijri Islamic dates</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="page-content">
+            <div style="background-color: #f9f9f9; padding: 2rem; border-radius: 8px; margin: 2rem 0;">
+                <h2>Convert Date</h2>
+                <input type="date" id="date" style="width: 100%; padding: 0.75rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 6px;">
+                <button type="button" class="btn btn-primary" onclick="convert()" style="width: 100%; padding: 1rem;">Convert</button>
+            </div>
+
+            <div id="results" class="hidden">
+                <div class="result-box">
+                    <table>
+                        <tr><th>Calendar</th><th>Date</th></tr>
+                        <tr><td>Gregorian</td><td id="gregorian">-</td></tr>
+                        <tr><td>Hijri</td><td id="hijri">-</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer"><div class="container"><p>&copy; 2026</p></div></footer>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('date').value = new Date().toISOString().split('T')[0];
+        });
+        async function convert() {
+            const d = document.getElementById('date').value;
+            const [y,m,day] = d.split('-');
+            try {
+                const res = await fetch(`https://api.aladhan.com/v1/convert?gregorian_date=${day}-${m}-${y}`);
+                const data = await res.json();
+                const h = data.data.hijri;
+                const months = ['Muharram','Safar','Rabi al-Awwal','Rabi al-Thani','Jumada I','Jumada II','Rajab','Shaban','Ramadan','Shawwal','Dhul-Qidah','Dhul-Hijjah'];
+                document.getElementById('gregorian').textContent = h.gregorian.date;
+                document.getElementById('hijri').textContent = `${h.day} ${months[h.month.number-1]} ${h.year} AH`;
+                document.getElementById('results').classList.remove('hidden');
+            } catch(e) { alert('Error'); }
+        }
+    </script>
+</body>
+</html>
