@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prayer Times - Namaz Times Today</title>
+    <meta name="description" content="Get accurate prayer times for your location">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Islamic Tools Hub</div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="ad-space ad-top"><div class="ad-placeholder">Ad Space</div></div>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Prayer Times</h1>
+            <p>Get accurate Namaz times for your location</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="page-content">
+            <div style="background-color: #f9f9f9; padding: 2rem; border-radius: 8px; margin: 2rem 0;">
+                <h2>Your Location</h2>
+                <input type="text" id="city" placeholder="City" value="Karachi" style="width: 100%; padding: 0.75rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 6px;">
+                <button type="button" class="btn btn-primary" onclick="getPrayerTimes()" style="width: 100%; padding: 1rem;">Get Prayer Times</button>
+            </div>
+
+            <div id="results" class="hidden">
+                <div class="result-box">
+                    <table>
+                        <tr><th>Prayer</th><th>Time</th></tr>
+                        <tr><td>Fajr</td><td id="fajr">-</td></tr>
+                        <tr><td>Dhuhr</td><td id="dhuhr">-</td></tr>
+                        <tr><td>Asr</td><td id="asr">-</td></tr>
+                        <tr><td>Maghrib</td><td id="maghrib">-</td></tr>
+                        <tr><td>Isha</td><td id="isha">-</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer"><div class="container"><p>&copy; 2026</p></div></footer>
+    <script src="js/main.js"></script>
+    <script>
+        async function getPrayerTimes() {
+            const city = document.getElementById('city').value;
+            const coords = {Karachi: {lat: 24.8607, lng: 67.0011}, Lahore: {lat: 31.5497, lng: 74.3436}};
+            const c = coords[city] || coords.Karachi;
+            const d = new Date();
+            const url = `https://api.aladhan.com/v1/timings/${d.getDate()}-${d.getMonth()+1}-${d.getFullYear()}?latitude=${c.lat}&longitude=${c.lng}&method=2`;
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
+                const t = data.data.timings;
+                document.getElementById('fajr').textContent = t.Fajr;
+                document.getElementById('dhuhr').textContent = t.Dhuhr;
+                document.getElementById('asr').textContent = t.Asr;
+                document.getElementById('maghrib').textContent = t.Maghrib;
+                document.getElementById('isha').textContent = t.Isha;
+                document.getElementById('results').classList.remove('hidden');
+            } catch(e) { alert('Error loading times'); }
+        }
+        getPrayerTimes();
+    </script>
+</body>
+</html>
