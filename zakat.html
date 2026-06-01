@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zakat Calculator - Calculate Your Zakat Obligation Online</title>
+    <meta name="description" content="Free online Zakat calculator. Calculate 2.5% of your wealth including cash, gold, silver, business assets, and investments. Instant results.">
+    <meta name="keywords" content="Zakat calculator, calculate zakat online, zakat calculator 2026, how to calculate zakat, zakat 2.5 percent">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://islamictoolshub.com/zakat.html">
+    
+    <meta property="og:title" content="Zakat Calculator - Free Online">
+    <meta property="og:description" content="Calculate your Zakat obligation instantly with our free online calculator.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://islamictoolshub.com/zakat.html">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Zakat Calculator">
+    <meta name="twitter:description" content="Free Zakat calculator online">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Islamic Tools Hub</div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Ad Space - Top Banner -->
+    <div class="ad-space ad-top">
+        <div class="ad-placeholder">Ad Space - Top Banner</div>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Zakat Calculator</h1>
+            <p>Calculate your Zakat obligation based on Islamic principles</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="page-content">
+            <div id="error-message" class="error-message"></div>
+            <div id="success-message" class="success-message"></div>
+
+            <!-- Ad Space - In-content -->
+            <div class="ad-space ad-inline">
+                <div class="ad-placeholder">Ad Space - In-Content</div>
+            </div>
+
+            <!-- Zakat Calculator Form -->
+            <div style="background-color: #f9f9f9; padding: 2rem; border-radius: 8px; margin: 2rem 0;">
+                <h2>Calculate Your Zakat</h2>
+                <p>Zakat is 2.5% of your total wealth. Enter your assets below:</p>
+
+                <form id="zakatForm">
+                    <div class="form-group">
+                        <label for="cash">Cash in Hand (PKR)</label>
+                        <input type="number" id="cash" placeholder="0" value="0" min="0" step="0.01">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bankBalance">Bank Balance (PKR)</label>
+                        <input type="number" id="bankBalance" placeholder="0" value="0" min="0" step="0.01">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="goldValue">Gold Value (PKR)</label>
+                        <input type="number" id="goldValue" placeholder="0" value="0" min="0" step="0.01">
+                        <small>Enter the market value of your gold</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="silverValue">Silver Value (PKR)</label>
+                        <input type="number" id="silverValue" placeholder="0" value="0" min="0" step="0.01">
+                        <small>Enter the market value of your silver</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="businessAssets">Business Assets (PKR)</label>
+                        <input type="number" id="businessAssets" placeholder="0" value="0" min="0" step="0.01">
+                        <small>Inventory, equipment, and other business assets</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="investments">Investments & Stocks (PKR)</label>
+                        <input type="number" id="investments" placeholder="0" value="0" min="0" step="0.01">
+                        <small>Value of shares, bonds, and other investments</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="debts">Outstanding Debts (PKR)</label>
+                        <input type="number" id="debts" placeholder="0" value="0" min="0" step="0.01">
+                        <small>This will be subtracted from your total wealth</small>
+                    </div>
+
+                    <button type="button" class="btn btn-primary" onclick="calculateZakat()" style="width: 100%; padding: 1rem; font-size: 1rem;">Calculate Zakat</button>
+                </form>
+            </div>
+
+            <!-- Results -->
+            <div id="zakatResults" class="hidden">
+                <div class="result-box">
+                    <h3>Zakat Calculation Results</h3>
+                    <table>
+                        <tr>
+                            <th>Item</th>
+                            <th>Amount (PKR)</th>
+                        </tr>
+                        <tr>
+                            <td>Cash</td>
+                            <td id="resultCash">-</td>
+                        </tr>
+                        <tr>
+                            <td>Bank Balance</td>
+                            <td id="resultBank">-</td>
+                        </tr>
+                        <tr>
+                            <td>Gold Value</td>
+                            <td id="resultGold">-</td>
+                        </tr>
+                        <tr>
+                            <td>Silver Value</td>
+                            <td id="resultSilver">-</td>
+                        </tr>
+                        <tr>
+                            <td>Business Assets</td>
+                            <td id="resultBusiness">-</td>
+                        </tr>
+                        <tr>
+                            <td>Investments</td>
+                            <td id="resultInvestments">-</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total Assets</strong></td>
+                            <td><strong id="totalAssets">-</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Less: Debts</td>
+                            <td id="resultDebts">-</td>
+                        </tr>
+                        <tr style="background-color: #e8f5e9;">
+                            <td><strong>Net Wealth</strong></td>
+                            <td><strong id="netWealth">-</strong></td>
+                        </tr>
+                        <tr style="background-color: #f0f7f3;">
+                            <td><strong>Your Zakat (2.5%)</strong></td>
+                            <td><strong id="zakatAmount" style="color: var(--primary-dark); font-size: 1.2rem;">-</strong></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- Ad Space -->
+                <div class="ad-space ad-inline">
+                    <div class="ad-placeholder">Ad Space - In-Content</div>
+                </div>
+
+                <div style="background-color: #e3f2fd; padding: 1.5rem; border-radius: 6px; margin: 2rem 0;">
+                    <h3 style="color: #1976d2; margin-bottom: 1rem;">📋 Zakat Guidelines</h3>
+                    <ul style="color: #555;">
+                        <li>Zakat is obligatory on Muslims who meet the nisab threshold</li>
+                        <li>Nisab is the minimum wealth required to pay Zakat</li>
+                        <li>Zakat rate is 2.5% of total wealth</li>
+                        <li>It is one of the Five Pillars of Islam</li>
+                        <li>Zakat is usually paid during Ramadan, especially before Eid</li>
+                        <li>Ensure your calculations are accurate and paid on time</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Ad Space - Footer Section -->
+    <div class="ad-space ad-footer">
+        <div class="ad-placeholder">Ad Space - Footer Advertisement</div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Islamic Tools Hub</h3>
+                    <p>Your trusted source for Islamic calculations and prayer times.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="privacy.html">Privacy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>More Tools</h3>
+                    <ul>
+                        <li><a href="fitrana.html">Fitrana Calculator</a></li>
+                        <li><a href="prayer-times.html">Prayer Times</a></li>
+                        <li><a href="hijri.html">Hijri Calendar</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Islamic Tools Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        function calculateZakat() {
+            try {
+                // Get input values
+                const cash = parseFloat(document.getElementById('cash').value) || 0;
+                const bankBalance = parseFloat(document.getElementById('bankBalance').value) || 0;
+                const goldValue = parseFloat(document.getElementById('goldValue').value) || 0;
+                const silverValue = parseFloat(document.getElementById('silverValue').value) || 0;
+                const businessAssets = parseFloat(document.getElementById('businessAssets').value) || 0;
+                const investments = parseFloat(document.getElementById('investments').value) || 0;
+                const debts = parseFloat(document.getElementById('debts').value) || 0;
+
+                // Validate inputs
+                if (cash < 0 || bankBalance < 0 || goldValue < 0 || silverValue < 0 || businessAssets < 0 || investments < 0 || debts < 0) {
+                    utils.showError('Please enter valid positive numbers only');
+                    return;
+                }
+
+                // Calculate total assets
+                const totalAssets = cash + bankBalance + goldValue + silverValue + businessAssets + investments;
+
+                // Calculate net wealth
+                const netWealth = totalAssets - debts;
+
+                if (netWealth < 0) {
+                    utils.showError('Your debts exceed your assets');
+                    return;
+                }
+
+                // Calculate Zakat (2.5%)
+                const zakatAmount = netWealth * 0.025;
+
+                // Display results
+                document.getElementById('resultCash').textContent = utils.formatCurrency(cash);
+                document.getElementById('resultBank').textContent = utils.formatCurrency(bankBalance);
+                document.getElementById('resultGold').textContent = utils.formatCurrency(goldValue);
+                document.getElementById('resultSilver').textContent = utils.formatCurrency(silverValue);
+                document.getElementById('resultBusiness').textContent = utils.formatCurrency(businessAssets);
+                document.getElementById('resultInvestments').textContent = utils.formatCurrency(investments);
+                document.getElementById('totalAssets').textContent = utils.formatCurrency(totalAssets);
+                document.getElementById('resultDebts').textContent = utils.formatCurrency(debts);
+                document.getElementById('netWealth').textContent = utils.formatCurrency(netWealth);
+                document.getElementById('zakatAmount').textContent = utils.formatCurrency(zakatAmount);
+
+                // Show results
+                document.getElementById('zakatResults').classList.remove('hidden');
+                utils.showSuccess('Zakat calculated successfully!');
+
+                // Scroll to results
+                document.getElementById('zakatResults').scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                utils.showError('Error calculating Zakat: ' + error.message);
+            }
+        }
+
+        // Allow Enter key to trigger calculation
+        document.getElementById('zakatForm').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                calculateZakat();
+            }
+        });
+    </script>
+</body>
+</html>

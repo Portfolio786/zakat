@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitrana Calculator - Calculate Zakat al-Fitr Online</title>
+    <meta name="description" content="Free online Fitrana (Zakat al-Fitr) calculator. Calculate Fitrana for your family in PKR, wheat, or rice. Instant results.">
+    <meta name="keywords" content="Fitrana calculator, Zakat al-Fitr, Fitrana 2026, calculate Fitrana online, Eid Fitrana">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://islamictoolshub.com/fitrana.html">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Islamic Tools Hub</div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Ad Space -->
+    <div class="ad-space ad-top">
+        <div class="ad-placeholder">Ad Space - Top Banner</div>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Fitrana Calculator</h1>
+            <p>Calculate Fitrana (Zakat al-Fitr) for your family</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="page-content">
+            <div id="error-message" class="error-message"></div>
+            <div id="success-message" class="success-message"></div>
+
+            <!-- Ad Space -->
+            <div class="ad-space ad-inline">
+                <div class="ad-placeholder">Ad Space - In-Content</div>
+            </div>
+
+            <!-- Calculator -->
+            <div style="background-color: #f9f9f9; padding: 2rem; border-radius: 8px; margin: 2rem 0;">
+                <h2>Calculate Fitrana</h2>
+                <p>Fitrana is paid before Eid prayers. Enter your details:</p>
+
+                <form id="fitranaForm">
+                    <div class="form-group">
+                        <label for="familyMembers">Number of Family Members</label>
+                        <input type="number" id="familyMembers" placeholder="1" value="1" min="1" step="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fitranaType">Payment Method</label>
+                        <select id="fitranaType">
+                            <option value="cash">Cash (PKR)</option>
+                            <option value="wheat">Wheat (KG)</option>
+                            <option value="rice">Rice (KG)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pricePerUnit">Price per Unit</label>
+                        <input type="number" id="pricePerUnit" placeholder="0" value="0" min="0" step="0.01">
+                        <small id="unitInfo">Enter price per KG for wheat or rice</small>
+                    </div>
+
+                    <button type="button" class="btn btn-primary" onclick="calculateFitrana()" style="width: 100%; padding: 1rem; font-size: 1rem;">Calculate Fitrana</button>
+                </form>
+            </div>
+
+            <!-- Results -->
+            <div id="fitranaResults" class="hidden">
+                <div class="result-box">
+                    <h3>Your Fitrana</h3>
+                    <table>
+                        <tr>
+                            <th>Description</th>
+                            <th>Amount</th>
+                        </tr>
+                        <tr>
+                            <td>Number of Members</td>
+                            <td id="resultMembers">-</td>
+                        </tr>
+                        <tr>
+                            <td>Per Person Fitrana</td>
+                            <td id="perPersonFitrana">-</td>
+                        </tr>
+                        <tr style="background-color: #f0f7f3;">
+                            <td><strong>Total Fitrana</strong></td>
+                            <td><strong id="totalFitrana" style="color: var(--primary-dark); font-size: 1.2rem;">-</strong></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- Ad Space -->
+                <div class="ad-space ad-inline">
+                    <div class="ad-placeholder">Ad Space - In-Content</div>
+                </div>
+
+                <div style="background-color: #fff3cd; padding: 1.5rem; border-radius: 6px; margin: 2rem 0;">
+                    <h3 style="color: #856404; margin-bottom: 1rem;">📌 Fitrana Information</h3>
+                    <ul style="color: #856404;">
+                        <li>Fitrana is Zakat al-Fitr, payable before Eid-ul-Fitr prayers</li>
+                        <li>Standard rate: 1.6 kg of wheat or rice per person (or equivalent in cash)</li>
+                        <li>It is obligatory for all Muslims including children</li>
+                        <li>Can be paid in cash or kind (wheat/rice)</li>
+                        <li>Must be paid before Eid prayers</li>
+                        <li>Given to the poor and needy</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Ad Space -->
+    <div class="ad-space ad-footer">
+        <div class="ad-placeholder">Ad Space - Footer Advertisement</div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Islamic Tools Hub</h3>
+                    <p>Your trusted source for Islamic calculations.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="privacy.html">Privacy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>More Tools</h3>
+                    <ul>
+                        <li><a href="zakat.html">Zakat Calculator</a></li>
+                        <li><a href="prayer-times.html">Prayer Times</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Islamic Tools Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        const FITRANA_WHEAT_KG = 1.6; // Standard: 1.6 kg per person
+        const FITRANA_RICE_KG = 1.6;
+
+        document.getElementById('fitranaType').addEventListener('change', function() {
+            const unitInfo = document.getElementById('unitInfo');
+            if (this.value === 'cash') {
+                unitInfo.textContent = 'Fitrana per person in PKR (standard: 200-300 PKR)';
+            } else if (this.value === 'wheat') {
+                unitInfo.textContent = `Enter price per KG (Standard: ${FITRANA_WHEAT_KG} kg per person)`;
+            } else {
+                unitInfo.textContent = `Enter price per KG (Standard: ${FITRANA_RICE_KG} kg per person)`;
+            }
+        });
+
+        function calculateFitrana() {
+            try {
+                const members = parseInt(document.getElementById('familyMembers').value) || 0;
+                const fitranaType = document.getElementById('fitranaType').value;
+                const pricePerUnit = parseFloat(document.getElementById('pricePerUnit').value) || 0;
+
+                if (members <= 0) {
+                    utils.showError('Please enter a valid number of family members');
+                    return;
+                }
+
+                if (pricePerUnit <= 0) {
+                    utils.showError('Please enter a valid price per unit');
+                    return;
+                }
+
+                let perPersonFitrana = 0;
+                let totalFitrana = 0;
+                let unitLabel = '';
+
+                if (fitranaType === 'cash') {
+                    perPersonFitrana = pricePerUnit;
+                    totalFitrana = perPersonFitrana * members;
+                    unitLabel = ' PKR';
+                } else if (fitranaType === 'wheat') {
+                    perPersonFitrana = FITRANA_WHEAT_KG * pricePerUnit;
+                    totalFitrana = perPersonFitrana * members;
+                    unitLabel = ' PKR';
+                } else if (fitranaType === 'rice') {
+                    perPersonFitrana = FITRANA_RICE_KG * pricePerUnit;
+                    totalFitrana = perPersonFitrana * members;
+                    unitLabel = ' PKR';
+                }
+
+                document.getElementById('resultMembers').textContent = members + ' person(s)';
+                document.getElementById('perPersonFitrana').textContent = utils.formatCurrency(perPersonFitrana);
+                document.getElementById('totalFitrana').textContent = utils.formatCurrency(totalFitrana);
+
+                document.getElementById('fitranaResults').classList.remove('hidden');
+                utils.showSuccess('Fitrana calculated successfully!');
+                document.getElementById('fitranaResults').scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                utils.showError('Error calculating Fitrana: ' + error.message);
+            }
+        }
+
+        // Trigger calculation on Enter
+        document.getElementById('fitranaForm').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                calculateFitrana();
+            }
+        });
+    </script>
+</body>
+</html>
