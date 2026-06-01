@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dua Generator - Daily Islamic Prayers</title>
+    <meta name="description" content="Daily Islamic duas and prayers generator">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Islamic Tools Hub</div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="ad-space ad-top"><div class="ad-placeholder">Ad Space</div></div>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Dua Generator</h1>
+            <p>Daily Islamic prayers and duas</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="page-content">
+            <div style="background-color: #f9f9f9; padding: 2rem; border-radius: 8px; margin: 2rem 0;">
+                <h2>Select Category</h2>
+                <select id="category" style="width: 100%; padding: 0.75rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 6px;">
+                    <option value="all">All</option>
+                    <option value="rizq">Rizq (Sustenance)</option>
+                    <option value="travel">Travel</option>
+                    <option value="difficulties">Difficulties</option>
+                    <option value="sleep">Before Sleep</option>
+                </select>
+                <button type="button" class="btn btn-primary" onclick="generate()" style="width: 100%; padding: 1rem;">Get Dua</button>
+            </div>
+
+            <div id="display" class="hidden">
+                <div class="result-box">
+                    <h3>Today's Dua</h3>
+                    <div style="background-color: #f5f5f5; padding: 1.5rem; border-radius: 6px; text-align: right; direction: rtl; font-size: 1.2rem; line-height: 2;">
+                        <p id="arabic">-</p>
+                    </div>
+                    <div style="background-color: #fff; padding: 1.5rem; border-radius: 6px; margin-top: 1rem;">
+                        <h4>Translation</h4>
+                        <p id="translation">-</p>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="generate()" style="width: 100%; padding: 1rem; margin-top: 1rem;">Another</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer"><div class="container"><p>&copy; 2026</p></div></footer>
+    <script src="js/main.js"></script>
+    <script>
+        const duas = {
+            rizq: [
+                {arabic: 'اللهم إني أسألك علما نافعا ورزقا طيبا', translation: 'O Allah, I ask You for beneficial knowledge and good provision.'},
+                {arabic: 'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً', translation: 'Our Lord, give us good in this world'}
+            ],
+            travel: [
+                {arabic: 'سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا', translation: 'Glory be to Him who made this for our use'}
+            ],
+            difficulties: [
+                {arabic: 'حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ', translation: 'Allah is sufficient for us and He is the best Guardian'}
+            ],
+            sleep: [
+                {arabic: 'اللهم باسمك أموت وأحيا', translation: 'O Allah, in Your name I die and I live'}
+            ]
+        };
+        function generate() {
+            const cat = document.getElementById('category').value;
+            let selected = cat === 'all' ? Object.values(duas).flat() : duas[cat] || [];
+            const dua = selected[Math.floor(Math.random() * selected.length)];
+            document.getElementById('arabic').textContent = dua.arabic;
+            document.getElementById('translation').textContent = dua.translation;
+            document.getElementById('display').classList.remove('hidden');
+        }
+        window.addEventListener('load', generate);
+    </script>
+</body>
+</html>
